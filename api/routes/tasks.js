@@ -50,7 +50,7 @@ const allTasks = [
     },
 ]
 
-router.get('/api/tasks/:id',(req,res) => {
+router.get('/:id',(req,res) => {
     // res.send('hello getter method request');
     // res.send(req.params.id);
     const track = taskList.filter(item=>item.id==req.params.id);
@@ -67,15 +67,15 @@ router.get('/api/tasks/:id',(req,res) => {
     // }
 }) // Get Specific Task in TaskList.
 
-router.get('/api/taskList',(req,res) => {
+router.get('/taskList',(req,res) => {
     res.send(JSON.stringify(taskList))
 }) // Get All Tasks in TaskList.
 
-router.get('/api/tasks',(req,res) => {
+router.get('/',(req,res) => {
     res.send(JSON.stringify(allTasks))
 }) // Get All Tasks.
 
-router.put('/api/taskList/add/:id',(req,res) => {
+router.put('/add/:id',(req,res) => {
 
     const toAdd = allTasks.find(item => item.id == req.params.id);
     const checker = taskList.find(item => item.id == req.params.id);
@@ -94,7 +94,7 @@ router.put('/api/taskList/add/:id',(req,res) => {
     // res.send(JSON.stringify(taskList))
 }) // Add a Task to TaskList.
 
-router.post('/api/taskList/new',(req,res) => {
+router.post('/taskList/new',(req,res) => {
     // res.send(req.body)
     const schema = Joi.object({
         assignee: Joi.string().min(3).required(),
@@ -122,7 +122,7 @@ router.post('/api/taskList/new',(req,res) => {
 
 }) // Create a new Task and add into AllTasks.
 
-router.delete('/api/taskList/remove/:id',(req,res) => {
+router.delete('/taskList/remove/:id',(req,res) => {
     const toRemove = allTasks.find(item => item.id == req.params.id);
     const checker = taskList.find(item => item.id == req.params.id);
     // res.send(toRemove);
@@ -149,7 +149,7 @@ router.delete('/api/taskList/remove/:id',(req,res) => {
     }
 }) // Remove Task from Tasklist.
 
-router.get('/api/taskList/saveTasks',async (req, res) => {
+router.get('/taskList/saveTasks',async (req, res) => {
     let toWrite = JSON.stringify(taskList);
     fileStream.writeFileSync('TaskList.json',toWrite)
     let filePath = path.join(__dirname,'TaskList.json')

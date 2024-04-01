@@ -49,7 +49,7 @@ const allTracks = [
     },
 ]
 
-router.get('/api/playlist/:id',(req,res) => {
+router.get('/:id',(req,res) => {
     // res.send('hello getter method request');
     // res.send(req.params.id);
     const track = playlist.filter(item=>item.id==req.params.id);
@@ -66,15 +66,15 @@ router.get('/api/playlist/:id',(req,res) => {
     // }
 })
 
-router.get('/api/playlist',(req,res) => {
+router.get('/',(req,res) => {
     res.send(JSON.stringify(playlist))
 })
 
-router.get('/api/tracks',(req,res) => {
+router.get('/tracks',(req,res) => {
     res.send(JSON.stringify(allTracks))
 })
 
-router.put('/api/playlist/add/:id',(req,res) => {
+router.put('/add/:id',(req,res) => {
 
     const toAdd = allTracks.find(item => item.id == req.params.id);
     const checker = playlist.find(item => item.id == req.params.id);
@@ -93,7 +93,7 @@ router.put('/api/playlist/add/:id',(req,res) => {
     // res.send(JSON.stringify(playlist))
 })
 
-router.post('/api/playlist/new',(req,res) => {
+router.post('/new',(req,res) => {
     // res.send(req.body)
     const schema = Joi.object({
         name: Joi.string().min(3).required(),
@@ -121,7 +121,7 @@ router.post('/api/playlist/new',(req,res) => {
 
 })
 
-router.delete('/api/playlist/remove/:id',(req,res) => {
+router.delete('/remove/:id',(req,res) => {
     const toRemove = allTracks.find(item => item.id == req.params.id);
     const checker = playlist.find(item => item.id == req.params.id);
     // res.send(toRemove);
@@ -148,7 +148,7 @@ router.delete('/api/playlist/remove/:id',(req,res) => {
     }
 })
 
-router.get('/api/playlist/:name/bio',async (req, res) => {
+router.get('/:name/bio',async (req, res) => {
     let url = `https://www.theaudiodb.com/api/v1/json/2/search.php?s=${req.params.name}`
     // let url_dos = `https://www.theaudiodb.com/api/v1/json/2/search.php?s=${req.params.name}`
 

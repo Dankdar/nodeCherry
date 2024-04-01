@@ -1,9 +1,11 @@
 const exp = require('express');
 const app = exp();
 const taskRoutes = require('./api/routes/tasks');
+const playlistRoutes = require('./api/routes/playlist');
 
-app.use(exp.json());
+app.use(exp.json()); // middleware for json parse.
 
-app.use('/tasks',taskRoutes);
+app.use('/playlist',playlistRoutes); // middleware for playlists
+app.use('/tasks',taskRoutes); // middleware for tasks
 
 module.exports = app;

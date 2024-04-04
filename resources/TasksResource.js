@@ -61,11 +61,7 @@ class Task {
         try {
             let data = JSON.parse(filestream.readFileSync('resources/storage/MyTaskList.json', 'utf8'));
             let toWrite = [];
-            data.forEach(item => {
-                console.log(item.id)
-                console.log(task.id)
-                console.log(item.id!=task.id)
-                if(item.id!=task.id) toWrite.push(item)})
+            data.forEach(item => { if(item.id!=task.id) toWrite.push(item)} )
             filestream.writeFileSync('resources/storage/MyTaskList.json',JSON.stringify(toWrite), (err)=>{
                 if( err ) {
                     throw err;
